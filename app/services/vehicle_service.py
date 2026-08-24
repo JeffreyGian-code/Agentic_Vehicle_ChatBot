@@ -50,3 +50,14 @@ class VehicleService:
             ]
 
         return results
+
+    def get_by_id(
+        self,
+        vehicle_id: int,
+    ) -> Vehicle | None:
+
+        for vehicle in self._vehicles:
+            if vehicle.id == vehicle_id:
+                return vehicle
+
+        return None

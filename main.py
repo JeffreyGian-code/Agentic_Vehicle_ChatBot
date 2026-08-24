@@ -1,14 +1,29 @@
-from app.services.vehicle_service import VehicleService
+from app.agents.agent import agent
 
 
-service = VehicleService(
-    "data/vehicles.json"
-)
+config = {
+    "configurable": {
+        "thread_id": "user-123"
+    }
+}
 
-results = service.search(
-    brand="Honda",
-    max_price=1000000,
-)
 
-for vehicle in results:
-    print(vehicle)
+while True:
+    user_input = input("You: ")
+
+    if user_input.lower() == "exit":
+        break
+
+    result = agent.invoke(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": user_input,
+                }
+            ]
+        },
+        config=config,
+    )
+
+    print("AI:", result["messages"][-1].content)
