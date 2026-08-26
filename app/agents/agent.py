@@ -3,7 +3,7 @@ from langchain.agents import create_agent
 from langchain_openrouter import ChatOpenRouter
 from langgraph.checkpoint.memory import InMemorySaver
 from app.tools.search_vehicle import search_vehicles,get_vehicle_details
-
+from app.tools.finance_tool import calculate_emi
 load_dotenv()
 
 checkpointer = InMemorySaver()
@@ -20,11 +20,17 @@ agent = create_agent(
     tools=[
         search_vehicles,
         get_vehicle_details,
+        calculate_emi,
     ],
-    system_prompt=(
-        "You are a helpful vehicle assistant. "
-        "Use the available tools when needed. "
-        "Do not invent vehicle information."
+   system_prompt=(
+    "You are a helpful vehicle assistant. "
+    "Use the available tools when needed. "
+    "Do not invent vehicle information. "
+    "When a search tool returns multiple matching "
+    "vehicles, include all matching vehicles in "
+    "your response. "
+    "If required information is missing, ask "
+    "the user instead of making assumptions."
     ),
     checkpointer=checkpointer,
 )
