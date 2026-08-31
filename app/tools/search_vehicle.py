@@ -1,7 +1,8 @@
 from langchain_core.tools import tool
 
 from app.services.vehicle_service import VehicleService
-
+from app.models.SearchRequest import SearchRequest
+from app.models.vehicle import Vehicle
 
 vehicle_service = VehicleService(
     "data/vehicles.json"
@@ -9,19 +10,14 @@ vehicle_service = VehicleService(
 
 
 @tool
-def search_vehicles(
-    brand: str | None = None,
-    max_price: int | None = None,
-    vehicle_type: str | None = None,
-):
-    """Search vehicles by brand, maximum price, and vehicle type."""
+def search_vehicles(request: SearchRequest) -> list[Vehicle]:
+    """Search vehicles using the provided search criteria."""
 
     return vehicle_service.search(
-        brand=brand,
-        max_price=max_price,
-        vehicle_type=vehicle_type,
+        brand=request.brand,
+        max_price=request.max_price,
+        vehicle_type=request.vehicle_type,
     )
-
 
 @tool
 def get_vehicle_details(
