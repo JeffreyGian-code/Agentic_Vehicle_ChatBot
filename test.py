@@ -1,8 +1,6 @@
 from app.agents.agent import agent
 
-import inspect
 
-print(inspect.signature(ModelCallLimitMiddleware))
 config = {
     "configurable": {
         "thread_id": "user-125"

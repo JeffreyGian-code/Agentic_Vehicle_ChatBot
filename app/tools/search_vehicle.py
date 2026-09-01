@@ -4,9 +4,7 @@ from app.services.vehicle_service import VehicleService
 from app.models.SearchRequest import SearchRequest
 from app.models.vehicle import Vehicle
 
-vehicle_service = VehicleService(
-    "data/vehicles.json"
-)
+vehicle_service = VehicleService()
 
 
 @tool
