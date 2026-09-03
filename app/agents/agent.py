@@ -3,12 +3,12 @@ from langchain.agents import create_agent
 from langchain.agents.middleware import ModelCallLimitMiddleware
 from langchain_openrouter import ChatOpenRouter
 from langgraph.checkpoint.memory import InMemorySaver
-from app.tools.search_vehicle import search_vehicles,get_vehicle_details
-from app.tools.finance_tool import calculate_emi
+from app.tools.agent_tools import AgentTools
 import inspect
-load_dotenv()
 
+load_dotenv()
 checkpointer = InMemorySaver()
+agent_tools = AgentTools()
 
 model = ChatOpenRouter(
     model="nvidia/nemotron-3.5-lightning:free",
@@ -18,11 +18,7 @@ model = ChatOpenRouter(
 
 agent = create_agent(
     model=model,
-    tools=[
-        search_vehicles,
-        get_vehicle_details,
-        calculate_emi,
-    ],
+    tools=agent_tools.get_tools(),
     system_prompt=(
         "You are a helpful vehicle assistant. "
         "Use the available tools when needed. "
