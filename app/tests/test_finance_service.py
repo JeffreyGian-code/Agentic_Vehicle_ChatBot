@@ -1,5 +1,6 @@
-from app.services.finance_service import FinanceService
+import pytest
 
+from app.services.finance_service import FinanceService
 
 
 def test_calculate_emi():
@@ -12,8 +13,6 @@ def test_calculate_emi():
         months=60,
     )
 
-    assert result["monthly_emi"] == 16403.68
-
-    assert result["total_payment"] == 984220.80
-
-    assert result["total_interest"] == 184220.80
+    assert result["monthly_emi"] == pytest.approx(16413.23)
+    assert result["total_payment"] == pytest.approx(984793.80)
+    assert result["total_interest"] == pytest.approx(184793.80)

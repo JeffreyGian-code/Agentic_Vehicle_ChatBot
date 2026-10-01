@@ -1,0 +1,9 @@
+langchain==1.3.16
+langchain-openrouter==0.2.8
+langgraph==1.2.11
+openrouter==0.11.46
+psycopg==3.3.5
+SQLAlchemy==2.0.52
+pydantic==2.12.5
+python-dotenv==1.2.3
+pytest==9.1.1

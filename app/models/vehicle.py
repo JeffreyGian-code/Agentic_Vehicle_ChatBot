@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class Vehicle(BaseModel):
     id: int
-    name: str
+    model: str
     brand: str
     price: int
     vehicle_type: str
