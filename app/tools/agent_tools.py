@@ -27,9 +27,10 @@ class AgentTools:
 
         return self.vehicle_service.search(
             brand=request.brand,
+            model=request.model,
             max_price=request.max_price,
             vehicle_type=request.vehicle_type,
-        )
+            )
 
     def get_vehicle_details(
         self,

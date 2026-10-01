@@ -13,7 +13,7 @@ agent_tools = AgentTools()
 system_prompt = load_prompt("vehicle_assistant.md")
 
 model = ChatOpenRouter(
-    model="nvidia/nemotron-3.5-lightning:free",
+    model="qwen/qwen3.8-27b:free",
     base_url="https://openrouter.ai/api/v1",
     temperature=0,
 )
@@ -24,8 +24,8 @@ agent = create_agent(
     system_prompt=system_prompt,
     middleware=[
         ModelCallLimitMiddleware(
-            run_limit=2,
-            thread_limit=3,
+            run_limit=5,
+            thread_limit=5,
             exit_behavior="error",
         )
     ],

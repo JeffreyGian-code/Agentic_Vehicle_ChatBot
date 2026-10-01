@@ -11,12 +11,13 @@ class PostgresVehicleRepository(VehicleRepository):
     def search(
         self,
         brand: str | None = None,
+        model: str | None = None,
         max_price: int | None = None,
         vehicle_type: str | None = None,
     ) -> list[Vehicle]:
 
         query = """
-            SELECT id, name, brand, price, vehicle_type
+            SELECT id, model, brand, price, vehicle_type
             FROM vehicles
         """
 
@@ -26,6 +27,10 @@ class PostgresVehicleRepository(VehicleRepository):
         if brand:
             conditions.append("LOWER(brand) = LOWER(:brand)")
             parameters["brand"] = brand
+
+        if model:
+            conditions.append("LOWER(model) = LOWER(:model)")
+            parameters["model"] = model
 
         if max_price is not None:
             conditions.append("price <= :max_price")
@@ -61,7 +66,7 @@ class PostgresVehicleRepository(VehicleRepository):
     ) -> Vehicle | None:
 
         query = """
-            SELECT id, name, brand, price, vehicle_type
+            SELECT id, model, brand, price, vehicle_type
             FROM vehicles
             WHERE id = :vehicle_id
         """

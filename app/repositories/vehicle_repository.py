@@ -9,6 +9,7 @@ class VehicleRepository(ABC):
     def search(
         self,
         brand: str | None = None,
+        model: str | None = None,
         max_price: int | None = None,
         vehicle_type: str | None = None,
     ) -> list[Vehicle]:
